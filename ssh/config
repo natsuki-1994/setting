@@ -1,0 +1,50 @@
+Host github.com
+  HostName github.com
+  IdentityFile ~/.ssh/id_rsa_natsuki-1994
+  User git
+
+Host ssh_akg
+  HostName akg.t.u-tokyo.ac.jp
+  User ikeda
+  IdentityFile ~/.ssh/id_rsa_akg
+
+Host ssh_akg-slave
+  HostName ns2.akg.t.u-tokyo.ac.jp
+  User ikeda
+  IdentityFile ~/.ssh/id_rsa_akg
+
+Host ssh_akg-mango
+  HostName mango.akg.t.u-tokyo.ac.jp
+  User ikeda
+  IdentityFile ~/.ssh/id_rsa_akg
+
+Host ssh_akg-web
+  HostName www.akg.t.u-tokyo.ac.jp
+  User akg
+  IdentityFile ~/.ssh/id_rsa_akg
+
+Host ssh_akg_dynamicforward
+  HostName akg.t.u-tokyo.ac.jp
+  User ikeda
+  DynamicForward 10080
+  IdentityFile ~/.ssh/id_rsa_akg
+  # リモートでコマンドを実行しない: ssh -N ssh_tunnel-akg
+
+Host ssh_akg-volta_localforward
+  HostName volta.akg.t.u-tokyo.ac.jp
+  User ikeda
+  ProxyCommand ssh -i ~/.ssh/id_rsa_akg -W %h:%p ssh_akg
+  IdentityFile ~/.ssh/id_rsa_akg
+
+Host ssh_akg-volta_root_localforward
+  HostName volta.akg.t.u-tokyo.ac.jp
+  User akg
+  ProxyCommand ssh -i ~/.ssh/id_rsa_akg -W %h:%p ssh_akg
+  IdentityFile ~/.ssh/id_rsa_akg
+  # root権限あり asami26710tohru
+
+Host ssh_akg-comsol_localforward
+  HostName akg.t.u-tokyo.ac.jp
+  User ikeda
+  IdentityFile ~/.ssh/id_rsa_akg
+  LocalForward 3389 comsol.akg.t.u-tokyo.ac.jp:3389
